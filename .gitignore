@@ -1,0 +1,3 @@
+dist/*.js
+dist/*.zip
+node_modules/
