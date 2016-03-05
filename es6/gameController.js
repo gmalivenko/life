@@ -42,9 +42,17 @@ class GameController {
   };
 
   render() {
+    this.ctx.fillStyle = this.waterFill;
+    this.ctx.fillRect(
+      0,
+      0,
+      this.canvas.width,
+      this.canvas.height
+    );
     for (var lineIndex = 0; lineIndex < this.life._field.length; lineIndex++) {
       for (var columnIndex = 0; columnIndex < this.life._field[lineIndex].length; columnIndex++) {
-        this._drawCell(lineIndex, columnIndex, this.life._field[lineIndex][columnIndex]);
+        if (this.life._field[lineIndex][columnIndex])
+          this._drawCell(lineIndex, columnIndex, this.life._field[lineIndex][columnIndex]);
       }
     }
   };
@@ -54,7 +62,7 @@ class GameController {
     $(document).mousedown(_.bind(this._mousedownEvent, this));
     $(document).on('mouseup', _.bind(this._mouseupEvent, this));
     $(document).mousemove(_.bind(this._mousemoveEvent, this));
-    $(document).on('keydown', _.bind(this._keydownEvent, this));
+    $(document).on('keydown', _.bind(_.throttle(this._keydownEvent, 30), this));
 
     $(document).bind('contextmenu', (e) => {
       return false;
@@ -73,6 +81,7 @@ class GameController {
         this.plant.src = this.plantTexture;
         this.plant.onload = () => {
           console.log('images loaded :)');
+          this.waterFill = this.ctx.createPattern(this.water, 'repeat');
           resolve();
         };
       };
@@ -88,8 +97,8 @@ class GameController {
   };
 
   _mousedownEvent(e) {
-    var x = Math.floor((e.pageX - $(this.canvasId).offset().left) / this.tilesize);
-    var y = Math.floor((e.pageY - $(this.canvasId).offset().top) / this.tilesize);
+    let x = Math.floor((e.pageX - $(this.canvasId).offset().left) / this.tilesize);
+    let y = Math.floor((e.pageY - $(this.canvasId).offset().top) / this.tilesize);
 
     if (e.button == 2) {
       this.life._field[x][y] = 0;

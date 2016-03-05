@@ -4,7 +4,7 @@ var _ = require('lodash');
 
 class Life {
   _getNeighboorsCount(i0, j0) {
-    var sum = 0;
+    let sum = 0;
     if (this._field[i0 - 1]) {
       sum = this._field[i0 - 1][j0 - 1] +  this._field[i0 - 1][j0] + this._field[i0 - 1][j0 + 1];
     }
@@ -37,7 +37,7 @@ class Life {
   };
 
   iterate() {
-    let iteratedField = [];
+    var iteratedField = [];
 
     for (var lineIndex = 0; lineIndex < this._field.length; lineIndex++) {
       iteratedField[lineIndex] = [];
