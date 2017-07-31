@@ -4,13 +4,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Game</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <title>Cellular automata</title>
     <style>
-      body {
+
+      html, body {
         padding: 0 auto;
         margin: 0 auto;
         overflow: hidden;
       }
+
       #game {
         position: absolute;
         padding: 0 auto;
@@ -18,20 +21,78 @@
         height: 100%;
         z-index: -1;
       }
+
       #marker {
         position: absolute;
-        border: 1px solid black;
-        width: 15px;
-        height: 15px;
+        border: 1px solid white;
+        width: 32px;
+        height: 32px;
         z-index: 1;
       }
+
       #help {
         z-index: 1000;
+        position: absolute;
+        max-width: 960px;
+        width: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        line-height: 5vh;
+        text-align: center;
+        vertical-align: middle;
+        background-color: #7f7f7f;
+        opacity: 0.85;
+        border: 2px solid white;
+        color: white;
+        border-radius: 5px;
+      }
+
+      .hint {
+        background-color: #4f4f4f;
+        border: 1px solid white;
+        border-radius: 5px;
+        padding: 5px 15px 5px 15px;
+        max-width: 280px;
+        width: auto;
+        margin-top: 5px;
+      }
+
+      .btn-style {
+        background-color: #4f4f4f;
+        border: 1px solid white;
+        border-radius: 5px;
+        padding: 5px 15px 5px 15px;
+        color: white;
+        display: block;
+        margin: 10px auto;
+        max-width: 280px;
+        width: 100%;
+
+      }
+
+      .wrap{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        max-width: 550px;
+        width: 100%;
+        margin: 10px auto;
       }
     </style>
   </head>
-  <body >
-    <div id="help"> Space - iterate, z - clear map, r - randomize <a href="#" id="helpHide">Play</a></div>
+  <body>
+    <div id="help"> 
+      <div class="wrap">
+        <span class="hint">SPACE - iterate</span>
+        <span class="hint">Z - clear game map</span>
+        <span class="hint">R - randomize</span>
+      </div>
+      <div class="btn-wrap">
+        <a href="#" id="helpHide" class="btn-style">Got it!</a>
+      </div>
+    </div>
+
     <canvas id="game"></canvas>
     <div id="marker"></div>
     <script src="bundle.js"></script>
